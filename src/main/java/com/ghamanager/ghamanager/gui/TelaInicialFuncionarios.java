@@ -8,14 +8,14 @@ package com.ghamanager.ghamanager.gui;
  *
  * @author luann
  */
-public class TelaEquipamentos extends javax.swing.JFrame {
+public class TelaInicialFuncionarios extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaEquipamentos.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaInicialFuncionarios.class.getName());
 
     /**
-     * Creates new form TelaEquipamentos
+     * Creates new form TelaInicialFuncionarios
      */
-    public TelaEquipamentos() {
+    public TelaInicialFuncionarios() {
         initComponents();
     }
 
@@ -30,29 +30,16 @@ public class TelaEquipamentos extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnCadastrarEquipamento = new javax.swing.JButton();
-        btnConsultaEquipamento = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnCursos = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel1.setText("Equipamentos");
-
-        btnCadastrarEquipamento.setText("Cadastrar Equipamento");
-        btnCadastrarEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarEquipamentoActionPerformed(evt);
-            }
-        });
-
-        btnConsultaEquipamento.setText("Agendar Preventiva");
-        btnConsultaEquipamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultaEquipamentoActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("GHA MANAGER");
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,46 +48,70 @@ public class TelaEquipamentos extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Alterar Cadastro Equipamento");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
+
+        btnCursos.setText("Cursos");
+        btnCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCursosActionPerformed(evt);
+            }
+        });
+
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel2.setText("Funcionários");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnCadastrarEquipamento)
-                .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVoltar)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnConsultaEquipamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(238, 238, 238))
+                        .addGap(280, 280, 280)
+                        .addComponent(btnVoltar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(btnCadastrar)
+                        .addGap(120, 120, 120)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 56, Short.MAX_VALUE)
+                                .addComponent(btnAlterar)
+                                .addGap(159, 159, 159)
+                                .addComponent(btnCursos)))))
+                .addGap(88, 88, 88))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(100, 100, 100)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrarEquipamento)
-                    .addComponent(btnConsultaEquipamento)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnCursos))
+                .addGap(94, 94, 94)
                 .addComponent(btnVoltar)
-                .addGap(64, 64, 64))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,20 +133,21 @@ public class TelaEquipamentos extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnCadastrarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEquipamentoActionPerformed
-       TelaCadastroEquipamento cadastro = new TelaCadastroEquipamento();
-       cadastro.setVisible(true);
-    }//GEN-LAST:event_btnCadastrarEquipamentoActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+       TelaAlterarFuncionario altFunc = new TelaAlterarFuncionario();
+       altFunc.setVisible(true);
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void btnConsultaEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaEquipamentoActionPerformed
-        TelaAgendaPreventiva telaAge = new TelaAgendaPreventiva();
-        telaAge.setVisible(true);
-    }//GEN-LAST:event_btnConsultaEquipamentoActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+      TelaCadastroFuncionario cadasFunc = new TelaCadastroFuncionario();
+      cadasFunc.setVisible(true);
+      
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      TelaAlterarCadastroEquipamento altCadas = new TelaAlterarCadastroEquipamento();
-      altCadas.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCursosActionPerformed
+       TelaInicialCursos telaCurso = new TelaInicialCursos ();
+       telaCurso.setVisible(true);
+    }//GEN-LAST:event_btnCursosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,15 +171,16 @@ public class TelaEquipamentos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaEquipamentos().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaInicialFuncionarios().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrarEquipamento;
-    private javax.swing.JButton btnConsultaEquipamento;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCursos;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

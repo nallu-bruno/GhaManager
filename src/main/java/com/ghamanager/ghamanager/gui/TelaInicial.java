@@ -37,7 +37,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
         btnTelaEquipamento = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRelatorios = new javax.swing.JButton();
+        btnFuncionarios = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -60,16 +61,32 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Relátorios");
+        btnRelatorios.setText("Relátorios");
+        btnRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatoriosActionPerformed(evt);
+            }
+        });
+
+        btnFuncionarios.setText("Funcionários");
+        btnFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFuncionariosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(313, 313, 313)
-                .addComponent(jLabel1)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addComponent(btnFuncionarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addComponent(btnTelaEquipamento)
+                .addGap(180, 180, 180)
+                .addComponent(btnRelatorios)
+                .addGap(86, 86, 86))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,21 +94,20 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addComponent(btnSair)
                         .addGap(366, 366, 366))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnTelaEquipamento)
-                        .addGap(66, 66, 66)
-                        .addComponent(jButton2)
-                        .addGap(79, 79, 79))))
+                        .addComponent(jLabel1)
+                        .addGap(307, 307, 307))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel1)
-                .addGap(113, 113, 113)
+                .addGap(120, 120, 120)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFuncionarios)
                     .addComponent(btnTelaEquipamento)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                    .addComponent(btnRelatorios))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                 .addComponent(btnSair)
                 .addGap(66, 66, 66))
         );
@@ -120,6 +136,16 @@ public class TelaInicial extends javax.swing.JFrame {
         equipamento.setVisible(true);
     }//GEN-LAST:event_btnTelaEquipamentoActionPerformed
 
+    private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed
+        TelaInicialFuncionarios funcionario = new TelaInicialFuncionarios();
+        funcionario.setVisible(true);
+    }//GEN-LAST:event_btnFuncionariosActionPerformed
+
+    private void btnRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatoriosActionPerformed
+        TelaRelatorio telaRela = new TelaRelatorio();
+        telaRela.setVisible(true);
+    }//GEN-LAST:event_btnRelatoriosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -146,9 +172,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFuncionarios;
+    private javax.swing.JButton btnRelatorios;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnTelaEquipamento;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
