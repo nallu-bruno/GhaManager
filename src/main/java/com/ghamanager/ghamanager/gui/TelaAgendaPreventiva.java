@@ -4,6 +4,13 @@
  */
 package com.ghamanager.ghamanager.gui;
 
+import com.ghamanager.persistencia.Equipamento;
+import com.ghamanager.persistencia.EquipamentoDAO;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luann
@@ -34,17 +41,20 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
         txtPtmEqp = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        txtTipoEqp = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
+        tipoEqp = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        dataUltimaPreventiva = new javax.swing.JTextField();
+        txtDataUltimaPreventiva = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDataPreventivaAtual = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        campoObs = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        ProximaPreventiva = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,24 +68,31 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo do Equipamento:");
 
-        jButton1.setText("Pequisar");
-
-        txtTipoEqp.setEditable(false);
-
-        jLabel5.setText("Data da Ultima Preventiva:");
-
-        dataUltimaPreventiva.setEditable(false);
-        dataUltimaPreventiva.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setText("Pequisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataUltimaPreventivaActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Data da Próxima Preventiva:");
+        tipoEqp.setEditable(false);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel5.setText("Data da Ultima Preventiva:");
+
+        txtDataUltimaPreventiva.setEditable(false);
+        txtDataUltimaPreventiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataUltimaPreventivaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Data da Preventiva Atual:");
+
+        txtDataPreventivaAtual.setEditable(false);
+
+        campoObs.setColumns(20);
+        campoObs.setRows(5);
+        jScrollPane1.setViewportView(campoObs);
 
         jLabel7.setText("Observações:");
 
@@ -87,49 +104,71 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
         });
 
         jButton3.setText("Agendar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Data da Proxima Preventiva:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPtmEqp, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTipoEqp, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(225, 225, 225))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel7))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dataUltimaPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(58, 58, 58))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)))
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton2)
+                                    .addGap(158, 158, 158)
+                                    .addComponent(btnLimpar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPtmEqp, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tipoEqp, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnPesquisar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtDataUltimaPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel6)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDataPreventivaAtual, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                    .addComponent(ProximaPreventiva))))))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,30 +177,33 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(52, 52, 52)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPtmEqp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPtmEqp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txtTipoEqp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(dataUltimaPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tipoEqp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtDataUltimaPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtDataPreventivaAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(ProximaPreventiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(jButton3)
+                    .addComponent(btnLimpar))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,13 +221,25 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dataUltimaPreventivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataUltimaPreventivaActionPerformed
+    private void txtDataUltimaPreventivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataUltimaPreventivaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dataUltimaPreventivaActionPerformed
+    }//GEN-LAST:event_txtDataUltimaPreventivaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        pesquisarEquipamento();
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+       limpar ();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       agendaPreventiva ();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,8 +267,10 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField dataUltimaPreventiva;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField ProximaPreventiva;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JTextArea campoObs;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -224,11 +280,80 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField tipoEqp;
+    private javax.swing.JTextField txtDataPreventivaAtual;
+    private javax.swing.JTextField txtDataUltimaPreventiva;
     private javax.swing.JTextField txtPtmEqp;
-    private javax.swing.JTextField txtTipoEqp;
     // End of variables declaration//GEN-END:variables
+
+    EquipamentoDAO eqpDAO = new EquipamentoDAO();
+    
+    public void limpar (){
+        txtPtmEqp.setText("");
+        txtDataUltimaPreventiva.setText("");
+        txtDataPreventivaAtual.setText("");
+        ProximaPreventiva.setText("");
+        campoObs.setText("");
+        tipoEqp.setText("");   
+    
+    }
+    
+    
+    
+    public void pesquisarEquipamento() {
+        String patrimonio = txtPtmEqp.getText();
+        Equipamento eqp = eqpDAO.buscarPorPatrimonio(patrimonio);
+        
+        if (eqp != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            
+            txtDataUltimaPreventiva.setText(sdf.format(eqp.getUltimaPreventiva()));
+            txtDataPreventivaAtual.setText(sdf.format(eqp.getProximaPreventiva()));
+            campoObs.setText(eqp.getObservacoes());
+            tipoEqp.setText(eqp.getTipoDoEquipamento());
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Equipamento não encontrado!");
+        }
+
+    }
+    
+ public void agendaPreventiva() {
+    EquipamentoDAO eqpDAO = new EquipamentoDAO();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    try {
+       
+        String patrimonio = txtPtmEqp.getText();
+        Equipamento eqp = eqpDAO.buscarPorPatrimonio(patrimonio);
+
+        if (eqp != null) {
+            
+            Date ultimaPreventiva = sdf.parse(txtDataPreventivaAtual.getText());
+            Date proximaPreventiva = sdf.parse(ProximaPreventiva.getText());
+
+           
+            eqp.setUltimaPreventiva(ultimaPreventiva);
+            eqp.setProximaPreventiva(proximaPreventiva);
+            eqp.setObservacoes(campoObs.getText());
+
+           
+            eqpDAO.alterarNoBanco(eqp);
+
+            JOptionPane.showMessageDialog(null, "Preventiva agendada com sucesso!");
+            limpar ();
+        } else {
+            JOptionPane.showMessageDialog(null, "Equipamento não encontrado!");
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro ao agendar Preventiva: " + e.getMessage());
+    }
+}
+    
+    
+
 }

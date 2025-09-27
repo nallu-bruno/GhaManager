@@ -4,6 +4,11 @@
  */
 package com.ghamanager.ghamanager.gui;
 
+import com.ghamanager.persistencia.Equipamento;
+import com.ghamanager.persistencia.EquipamentoDAO;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luann
@@ -28,6 +33,7 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField2 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -40,9 +46,11 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
         btnCadastar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
-        checkBoxEmUso = new javax.swing.JCheckBox();
-        checkBoxTransferencia = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
+        checkBoxTransferido = new javax.swing.JCheckBox();
+        checkBoxEmUso = new javax.swing.JCheckBox();
+
+        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,6 +61,11 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
         jLabel2.setText("Patrimônio:");
 
         cbTipoEquipamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ","Air Conditioning Unit", "Air Start Unit", "Carreta de Bagagem", "Carro", "Dolly","Escada","Esteira de Bagagem","Ground Power Uunit","Loader","Push-back","Trator Elétrico","Van" }));
+        cbTipoEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoEquipamentoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Tipo do Equipamento:");
 
@@ -84,21 +97,21 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
             }
         });
 
-        checkBoxEmUso.setText("Em uso ?");
-        checkBoxEmUso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkBoxEmUsoActionPerformed(evt);
-            }
-        });
-
-        checkBoxTransferencia.setText("Transferido");
-        checkBoxTransferencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkBoxTransferenciaActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        checkBoxTransferido.setText("Transferido");
+        checkBoxTransferido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxTransferidoActionPerformed(evt);
+            }
+        });
+
+        checkBoxEmUso.setText("Em Uso");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,11 +131,11 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
                         .addComponent(cbTipoEquipamento, 0, 172, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(152, 152, 152)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkBoxEmUso)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkBoxTransferencia)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(31, 31, 31)
+                        .addComponent(checkBoxTransferido)
+                        .addGap(73, 73, 73)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
@@ -153,18 +166,19 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
                     .addComponent(txtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(86, 86, 86)
-                        .addComponent(jLabel6))
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkBoxEmUso)
-                            .addComponent(checkBoxTransferencia))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(checkBoxTransferido)
+                            .addComponent(checkBoxEmUso))
+                        .addGap(19, 19, 19)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,24 +204,28 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastarActionPerformed
-        
+        alterarCadastro();
     }//GEN-LAST:event_btnCadastarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-       
+        limpar();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void checkBoxEmUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxEmUsoActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       pesquisarEquipamento();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    }//GEN-LAST:event_checkBoxEmUsoActionPerformed
-
-    private void checkBoxTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxTransferenciaActionPerformed
+    private void cbTipoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoEquipamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_checkBoxTransferenciaActionPerformed
+    }//GEN-LAST:event_cbTipoEquipamentoActionPerformed
+
+    private void checkBoxTransferidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxTransferidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkBoxTransferidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,7 +258,7 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbTipoEquipamento;
     private javax.swing.JCheckBox checkBoxEmUso;
-    private javax.swing.JCheckBox checkBoxTransferencia;
+    private javax.swing.JCheckBox checkBoxTransferido;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -248,7 +266,80 @@ public class TelaAlterarCadastroEquipamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextArea txtCampoObservacao;
     private javax.swing.JTextField txtPatrimonio;
     // End of variables declaration//GEN-END:variables
+
+     EquipamentoDAO eqpDAO = new EquipamentoDAO();
+     
+     public void limpar(){
+         txtPatrimonio.setText("");
+         cbTipoEquipamento.setSelectedIndex(0);
+         txtCampoObservacao.setText("");
+         checkBoxEmUso.setSelected(false);
+         checkBoxTransferido.setSelected(false);     
+     }
+     
+     
+     
+      public void pesquisarEquipamento() {
+         
+          String palavraTeste = "true";
+          
+        String patrimonio = txtPatrimonio.getText();
+        Equipamento eqp = eqpDAO.buscarPorPatrimonio(patrimonio);
+        
+        if (eqp != null) {
+           cbTipoEquipamento.setSelectedItem(eqp.getTipoDoEquipamento());
+           
+           if (eqp.getEmUso().equals(palavraTeste)){
+               checkBoxEmUso.setSelected(true);
+           } else{
+                checkBoxEmUso.setSelected(false);
+           }        
+           
+            if (eqp.getTransferido().equals(palavraTeste)) {
+                checkBoxTransferido.setSelected(true);
+            } else {
+                checkBoxTransferido.setSelected(false);
+            }
+           
+           txtCampoObservacao.setText(eqp.getObservacoes());            
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Equipamento não encontrado!");
+        }
+
+    }
+      
+     public void alterarCadastro() {
+         
+        try {
+            String patrimonio = txtPatrimonio.getText();
+            Equipamento eqp = eqpDAO.buscarPorPatrimonio(patrimonio);
+            if ( eqp != null){
+            eqp.setPatrimonio(txtPatrimonio.getText());
+            eqp.setTipoDoEquipamento(cbTipoEquipamento.getSelectedItem().toString());
+            eqp.setEmUso(checkBoxEmUso.isSelected() ? "true" : "false");
+            eqp.setTransferido(checkBoxTransferido.isSelected() ? "true" : "false");
+            eqp.setObservacoes(txtCampoObservacao.getText());
+            
+            eqpDAO.alterarNoBanco(eqp);
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            limpar();
+            
+            } else {
+            JOptionPane.showMessageDialog(null, "Equipamento não encontrado!");
+            
+            }
+                    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar cadastro: " + e.getMessage());
+
+        }
+
+    }
+
+
 }

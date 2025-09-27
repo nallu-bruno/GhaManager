@@ -7,6 +7,7 @@ com\ghamanager\ghamanager\gui\TelaInicial$4.class
 com\ghamanager\ghamanager\gui\TelaInicial.class
 com\ghamanager\ghamanager\gui\TelaInicialCursos.class
 com\ghamanager\ghamanager\gui\GhaManager.class
+com\ghamanager\ghamanager\gui\TelaAgendaPreventiva$5.class
 com\ghamanager\persistencia\UsuarioDAO.class
 com\ghamanager\ghamanager\gui\TelaAlterarCadastroEquipamento$2.class
 com\ghamanager\persistencia\Usuario.class
@@ -28,8 +29,10 @@ com\ghamanager\ghamanager\gui\TelaCadastroEquipamento$5.class
 com\ghamanager\ghamanager\gui\TelaInicial$2.class
 com\ghamanager\ghamanager\gui\TelaRelatorioCursos.class
 com\ghamanager\persistencia\EquipamentoDAO.class
+com\ghamanager\ghamanager\gui\TelaAlterarCadastroEquipamento$6.class
 com\ghamanager\ghamanager\gui\TelaEquipamentos$3.class
 com\ghamanager\ghamanager\gui\TelaInicialCursos$3.class
+com\ghamanager\ghamanager\gui\TelaAgendaPreventiva$3.class
 com\ghamanager\ghamanager\gui\TelaCadastroEquipamento.class
 com\ghamanager\ghamanager\gui\TelaAlterarCadastroEquipamento$4.class
 com\ghamanager\ghamanager\gui\TelaInicialFuncionarios$4.class
@@ -47,6 +50,7 @@ com\ghamanager\ghamanager\gui\TelaAlterarCadastroEquipamento$5.class
 com\ghamanager\ghamanager\gui\telaLogin$1.class
 com\ghamanager\ghamanager\gui\TelaCadastroEquipamento$1.class
 com\ghamanager\ghamanager\gui\TelaEquipamentos$1.class
+com\ghamanager\ghamanager\gui\TelaAgendaPreventiva$4.class
 com\ghamanager\ghamanager\gui\TelaInicialFuncionarios$3.class
 com\ghamanager\persistencia\Equipamento.class
 com\ghamanager\ghamanager\gui\TelaAgendaPreventiva$1.class
@@ -57,5 +61,6 @@ com\ghamanager\ghamanager\gui\TelaAlterarFuncionario$3.class
 com\ghamanager\ghamanager\gui\TelaRelatorioCursos$1.class
 com\ghamanager\ghamanager\gui\TelaAlterarFuncionario.class
 com\ghamanager\ghamanager\gui\TelaCadastroEquipamento$7.class
+com\ghamanager\ghamanager\gui\TelaRelatorio$2.class
 com\ghamanager\ghamanager\gui\TelaAlterarCadastroEquipamento$1.class
 com\ghamanager\ghamanager\gui\TelaCadastroFuncionario$2.class

@@ -49,6 +49,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
         btnRelatUsuario.setText("Usuários");
 
         btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Relatórios");
@@ -104,6 +109,10 @@ public class TelaRelatorio extends javax.swing.JFrame {
     private void btnRelatFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatFuncActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRelatFuncActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+       dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments

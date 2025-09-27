@@ -315,17 +315,20 @@ public class TelaCadastroEquipamento extends javax.swing.JFrame {
             Date ultimaPreventiva = sdf.parse(txtUltimaPreventiva.getText());
             Date proximaPreventiva = sdf.parse(txtProximaPreventiva.getText());
             
-             Equipamento eqpto = new Equipamento();
+            Equipamento eqpto = new Equipamento();
             eqpto.setPatrimonio(txtPatrimonio.getText());
             eqpto.setTipoDoEquipamento(cbTipoEquipamento.getSelectedItem().toString());
-            eqpto.setEmUso(checkBoxEmUso.isSelected() ? "sim" : "Não");
-            eqpto.setTransferencia(checkBoxTransferencia.isSelected() ? "sim" : "Não");
+            eqpto.setEmUso(checkBoxEmUso.isSelected() ? "true" : "false");
+            eqpto.setTransferencia(checkBoxTransferencia.isSelected() ? "true" : "false");
+            eqpto.setTransferido("false");
             eqpto.setUltimaPreventiva(ultimaPreventiva);
             eqpto.setProximaPreventiva(proximaPreventiva);
             eqpto.setObservacoes(txtCampoObservacao.getText());
 
             EquipamentoDAO eqptoDao = new EquipamentoDAO();
             eqptoDao.cadastrar(eqpto);
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!") ;
+            limparTela();
 
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(this,

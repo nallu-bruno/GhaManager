@@ -18,11 +18,39 @@ public class Equipamento {
     private String tipoDoEquipamento;
     private String emUso;
     private String transferencia;
+    private String transferido;
+
+    public String getEmUso() {
+        return emUso;
+    }
+
+    public void setEmUso(String emUso) {
+        this.emUso = emUso;
+    }
+
+    public String getTransferencia() {
+        return transferencia;
+    }
+
+    public void setTransferencia(String transferencia) {
+        this.transferencia = transferencia;
+    }
+
+    public String getTransferido() {
+        return transferido;
+    }
+
+    public void setTransferido(String transferido) {
+        this.transferido = transferido;
+    }
     @Temporal(TemporalType.DATE)
     private Date ultimaPreventiva;
     @Temporal(TemporalType.DATE)
     private Date proximaPreventiva;
     private String observacoes;
+
+    public Equipamento() {
+    }
 
     public int getId() {
         return id;
@@ -48,13 +76,9 @@ public class Equipamento {
         this.tipoDoEquipamento = tipoDoEquipamento;
     }
 
-    public String getEmUso() {
-        return emUso;
-    }
+   
 
-    public void setEmUso(String emUso) {
-        this.emUso = emUso;
-    }
+   
 
     public Date getUltimaPreventiva() {
         return ultimaPreventiva;
@@ -79,13 +103,4 @@ public class Equipamento {
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
-
-    public String getTransferencia() {
-        return transferencia;
-    }
-
-    public void setTransferencia(String transferencia) {
-        this.transferencia = transferencia;
-    }
-
-}
+  }
