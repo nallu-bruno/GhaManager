@@ -312,6 +312,7 @@ public class TelaAgendaPreventiva extends javax.swing.JFrame {
             
             txtDataUltimaPreventiva.setText(sdf.format(eqp.getUltimaPreventiva()));
             txtDataPreventivaAtual.setText(sdf.format(eqp.getProximaPreventiva()));
+            
             campoObs.setText(eqp.getObservacoes());
             tipoEqp.setText(eqp.getTipoDoEquipamento());
 

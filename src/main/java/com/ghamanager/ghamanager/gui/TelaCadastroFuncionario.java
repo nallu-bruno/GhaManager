@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ghamanager.ghamanager.gui;
 
-/**
- *
- * @author luann
- */
+import com.ghamanager.persistencia.Funcionario;
+import com.ghamanager.persistencia.FuncionarioDAO;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 public class TelaCadastroFuncionario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCadastroFuncionario.class.getName());
@@ -50,9 +48,10 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         cbSetor = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        campoOBS = new javax.swing.JTextArea();
         btnCadastrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,9 +92,9 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
 
         jLabel12.setText("Observação:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        campoOBS.setColumns(20);
+        campoOBS.setRows(5);
+        jScrollPane1.setViewportView(campoOBS);
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +107,13 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
+            }
+        });
+
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
             }
         });
 
@@ -126,7 +132,9 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnVoltar)
-                                    .addGap(817, 817, 817)
+                                    .addGap(355, 355, 355)
+                                    .addComponent(btnLimpar)
+                                    .addGap(387, 387, 387)
                                     .addComponent(btnCadastrar))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +226,8 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
-                    .addComponent(btnVoltar))
+                    .addComponent(btnVoltar)
+                    .addComponent(btnLimpar))
                 .addGap(19, 19, 19))
         );
 
@@ -231,12 +240,16 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRGActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+        cadastrarFuncionario();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
        dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limparTela();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,7 +278,9 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JTextArea campoOBS;
     private javax.swing.JComboBox<String> cbFuncao;
     private javax.swing.JComboBox<String> cbSetor;
     private javax.swing.JLabel jLabel1;
@@ -281,7 +296,6 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtDataDeAdmissao;
     private javax.swing.JTextField txtDataDeNascimento;
@@ -290,4 +304,56 @@ public class TelaCadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtRG;
     // End of variables declaration//GEN-END:variables
+
+    public void limparTela() {
+
+        txtNome.setText("");
+        txtMatricula.setText("");
+        txtRG.setText("");
+        txtCPF.setText("");
+        txtDataDeNascimento.setText("");
+        txtEndereco.setText("");
+        txtDataDeAdmissao.setText("");
+        cbFuncao.setSelectedIndex(0);
+        cbSetor.setSelectedIndex(0);
+        campoOBS.setText("");
+
+    }
+
+    
+    public void cadastrarFuncionario() {
+        Funcionario func = new Funcionario();
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            Date dataNascimento = sdf.parse(txtDataDeNascimento.getText());
+            Date dataAdmissao = sdf.parse(txtDataDeAdmissao.getText());
+
+            func.setNome(txtNome.getText());
+            func.setMatricula(txtMatricula.getText());
+            func.setRg(txtRG.getText());
+            func.setCpf(txtCPF.getText());
+            func.setDataDeNascimento(dataNascimento);
+            func.setEndereco(txtEndereco.getText());
+            func.setDataDeAdmissao(dataAdmissao);
+            func.setFuncao(cbFuncao.getSelectedItem().toString());
+            func.setSetor(cbSetor.getSelectedItem().toString());
+            func.setDemitido("false");
+            func.setobservacoes(campoOBS.getText());
+
+            funcDAO.cadastrar(func);
+            JOptionPane.showMessageDialog(this, "Cadastrado com sucesso!");
+
+            limparTela();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar " + e);
+
+        }
+
+    }
+
+
 }
