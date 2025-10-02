@@ -6,6 +6,7 @@
         <class>com.ghamanager.persistencia.Usuario</class>
         <class>com.ghamanager.persistencia.Equipamento</class>
         <class>com.ghamanager.persistencia.Funcionario</class>
+        <class>com.ghamanager.persistencia.Curso</class>
         
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
             

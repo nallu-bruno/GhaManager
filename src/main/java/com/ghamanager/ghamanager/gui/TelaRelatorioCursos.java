@@ -4,12 +4,20 @@
  */
 package com.ghamanager.ghamanager.gui;
 
+import com.ghamanager.persistencia.Curso;
+import com.ghamanager.persistencia.Funcionario;
+import com.ghamanager.persistencia.FuncionarioDAO;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author luann
  */
 public class TelaRelatorioCursos extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaRelatorioCursos.class.getName());
 
     /**
@@ -36,7 +44,7 @@ public class TelaRelatorioCursos extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaCurso = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -57,7 +65,7 @@ public class TelaRelatorioCursos extends javax.swing.JFrame {
 
         jLabel4.setText("Matricula:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaCurso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -73,9 +81,14 @@ public class TelaRelatorioCursos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaCurso);
 
         btnVoltar.setText("Consultar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -160,8 +173,12 @@ public class TelaRelatorioCursos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeFuncionarioActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        pesquisaNoBanco();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,8 +214,50 @@ public class TelaRelatorioCursos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelaCurso;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNomeFuncionario;
     // End of variables declaration//GEN-END:variables
+
+    public void pesquisaNoBanco() {
+
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+
+        String matriculaFuncionario = txtMatricula.getText();
+
+        DefaultTableModel tabela = (DefaultTableModel) tabelaCurso.getModel();
+        tabela.setRowCount(0);
+
+        Funcionario func = funcDAO.buscaFuncionarioCursosPorMatricula(matriculaFuncionario);
+
+        if (func != null) {
+
+            txtNomeFuncionario.setText(func.getNome());
+
+            List<Curso> cursos = func.getCursos();
+
+            if (cursos.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Sem cursos cadastrado para o funcionario");
+            } else {
+                // Formato para as datas na tabela
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                for (Curso curso : cursos) {
+                    // Preenche uma nova linha da tabela para cada curso
+                    Object[] linha = new Object[]{
+                        curso.getNomeCurso(),
+                        sdf.format(curso.getDataRealizada()),
+                        sdf.format(curso.getDataValidade()), // Adicione mais colunas aqui, se necessário
+                    };
+                    tabela.addRow(linha);
+
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Funcionario não encontrado!");
+        }
+
+    }
+
 }

@@ -1,11 +1,16 @@
 package com.ghamanager.persistencia;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -28,6 +33,9 @@ public class Funcionario {
     @Temporal(TemporalType.DATE)
     private Date dataDeDemissao;
     private String observacoes;
+    
+     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Curso> cursos = new ArrayList<>(); 
 
     public Funcionario() {
     }
@@ -135,6 +143,23 @@ public class Funcionario {
     public void setobservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+    
     
     
     
