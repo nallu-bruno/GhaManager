@@ -4,6 +4,8 @@ import com.ghamanager.jpa.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import java.util.Collections;
+import java.util.List;
 
 public class EquipamentoDAO {
 
@@ -50,4 +52,20 @@ public class EquipamentoDAO {
         }
 
     }
-}
+
+    public List<Equipamento> buscarTodosEquipamentos() {
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try {
+            String jpql = "SELECT e FROM Equipamento e";
+            TypedQuery<Equipamento> query = em.createQuery(jpql, Equipamento.class);
+            return query.getResultList();            
+
+        } catch (NoResultException e) {
+            return Collections.emptyList();
+        } finally {
+            em.close();
+        }
+    }
+
+    }

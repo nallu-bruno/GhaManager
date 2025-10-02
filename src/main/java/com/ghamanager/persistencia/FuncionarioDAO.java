@@ -3,8 +3,9 @@ package com.ghamanager.persistencia;
 import com.ghamanager.jpa.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.NonUniqueResultException;
 import jakarta.persistence.TypedQuery;
+import java.util.Collections;
+import java.util.List;
 
 public class FuncionarioDAO {
 
@@ -70,7 +71,7 @@ public class FuncionarioDAO {
         Funcionario funcionario = null;
 
         try {
-            String jpql = "SELECT f FROM Funcionario f JOIN FETCH f.cursos c WHERE f.matricula = :matricula";
+            String jpql = "SELECT f FROM Funcionario f LEFT JOIN FETCH f.cursos WHERE f.matricula = :matricula";
 
             TypedQuery<Funcionario> query = em.createQuery(jpql, Funcionario.class).setParameter("matricula", matricula);
             funcionario = query.getSingleResult();
@@ -82,6 +83,28 @@ public class FuncionarioDAO {
         }
 
         return funcionario;
+    }
+
+    public List<Funcionario> buscarTodosFuncionariosAtivos() {        
+
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try {
+            String jpql = "SELECT f FROM Funcionario f WHERE f.demitido = :demitido";
+            TypedQuery<Funcionario> query = em.createQuery(jpql, Funcionario.class);
+
+            query.setParameter("demitido", "false");
+
+            return query.getResultList();
+
+        } catch (NoResultException e) {
+
+            return Collections.emptyList(); // Retorna uma lista vazia e segura
+        } finally {
+
+            em.close();
+
+        }
     }
 
 }

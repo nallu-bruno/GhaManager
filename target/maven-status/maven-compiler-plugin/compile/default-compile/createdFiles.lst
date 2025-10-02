@@ -45,6 +45,7 @@ com\ghamanager\ghamanager\gui\TelaAlterarCadastroEquipamento$4.class
 com\ghamanager\ghamanager\gui\TelaInicialFuncionarios$4.class
 com\ghamanager\ghamanager\gui\TelaAlterarFuncionario$4.class
 com\ghamanager\jpa\JPAUtil.class
+com\ghamanager\ghamanager\gui\TelaRelatorio$3.class
 com\ghamanager\ghamanager\gui\TelaInicial$3.class
 com\ghamanager\ghamanager\gui\TelaRelatorio.class
 com\ghamanager\ghamanager\gui\TelaCadastroFuncionario$3.class
@@ -62,6 +63,7 @@ com\ghamanager\ghamanager\gui\TelaEquipamentos$1.class
 com\ghamanager\ghamanager\gui\TelaAgendaPreventiva$4.class
 com\ghamanager\ghamanager\gui\TelaInicialFuncionarios$3.class
 com\ghamanager\ghamanager\gui\TelaRelatorioCursos$4.class
+com\ghamanager\relatorio\Relatorio.class
 com\ghamanager\persistencia\Equipamento.class
 com\ghamanager\ghamanager\gui\TelaAgendaPreventiva$1.class
 com\ghamanager\ghamanager\gui\TelaInicialCursos$1.class

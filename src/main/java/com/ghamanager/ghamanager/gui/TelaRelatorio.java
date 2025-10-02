@@ -4,6 +4,18 @@
  */
 package com.ghamanager.ghamanager.gui;
 
+import com.ghamanager.persistencia.Equipamento;
+import com.ghamanager.persistencia.EquipamentoDAO;
+import com.ghamanager.persistencia.Funcionario;
+import com.ghamanager.persistencia.FuncionarioDAO;
+import com.ghamanager.relatorio.Relatorio;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author luann
@@ -31,7 +43,6 @@ public class TelaRelatorio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnRelatFunc = new javax.swing.JButton();
         btnRelatEqui = new javax.swing.JButton();
-        btnRelatUsuario = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -45,8 +56,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
         });
 
         btnRelatEqui.setText("Equipamentos");
-
-        btnRelatUsuario.setText("Usuários");
+        btnRelatEqui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatEquiActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,16 +79,17 @@ public class TelaRelatorio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(btnRelatEqui)
-                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRelatFunc)
-                            .addComponent(btnVoltar))
                         .addGap(40, 40, 40)
-                        .addComponent(btnRelatUsuario)))
-                .addGap(18, 18, 18))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(btnVoltar))
+                        .addGap(152, 152, 152))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRelatFunc)
+                        .addGap(40, 40, 40))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -84,7 +99,6 @@ public class TelaRelatorio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRelatEqui)
-                    .addComponent(btnRelatUsuario)
                     .addComponent(btnRelatFunc))
                 .addGap(96, 96, 96)
                 .addComponent(btnVoltar)
@@ -107,12 +121,16 @@ public class TelaRelatorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRelatFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatFuncActionPerformed
-        // TODO add your handling code here:
+        gerarRelatorioFuncionario();
     }//GEN-LAST:event_btnRelatFuncActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
        dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnRelatEquiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatEquiActionPerformed
+       gerarRelatorioEquipamento ();
+    }//GEN-LAST:event_btnRelatEquiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,9 +160,81 @@ public class TelaRelatorio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRelatEqui;
     private javax.swing.JButton btnRelatFunc;
-    private javax.swing.JButton btnRelatUsuario;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+private void gerarRelatorioFuncionario() {
+    FuncionarioDAO funcDAO = new FuncionarioDAO();
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Salvar Relatório de Funcionários");
+    fileChooser.setSelectedFile(new File("relatorio_funcionarios.xlsx")); 
+
+    int userSelection = fileChooser.showSaveDialog(this);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File arquivo = fileChooser.getSelectedFile();
+
+        if (!arquivo.getName().toLowerCase().endsWith(".xlsx")) {
+            arquivo = new File(arquivo.getParentFile(), arquivo.getName() + ".xlsx");
+        }
+
+        try {
+            List<Funcionario> funcionarios = funcDAO.buscarTodosFuncionariosAtivos();
+
+            if (funcionarios.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Não há funcionários ativos para gerar o relatório.");
+                return;
+            }
+
+            Relatorio relatorio = new Relatorio();
+            relatorio.relatorioFuncionario(funcionarios, arquivo.getAbsolutePath());
+
+            JOptionPane.showMessageDialog(this, "Relatório gerado com sucesso em:\n" + arquivo.getAbsolutePath());
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao gerar relatório: " + e.getMessage());
+            e.printStackTrace(); // útil para depuração
+        }
+    }
+}
+private void gerarRelatorioEquipamento () {
+   EquipamentoDAO eqpDAO = new EquipamentoDAO();
+    
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Salvar Relatório de Equipamento");
+    fileChooser.setSelectedFile(new File("relatorio_equipamento.xlsx")); 
+
+    int userSelection = fileChooser.showSaveDialog(this);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File arquivo = fileChooser.getSelectedFile();
+
+        if (!arquivo.getName().toLowerCase().endsWith(".xlsx")) {
+            arquivo = new File(arquivo.getParentFile(), arquivo.getName() + ".xlsx");
+        }
+
+        try {
+            List<Equipamento> equipamento = eqpDAO.buscarTodosEquipamentos();
+
+            if (equipamento.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Não há Equipamentos ativos para gerar o relatório.");
+                return;
+            }
+
+            Relatorio relatorio = new Relatorio();
+            relatorio.relatorioEquipamentos(equipamento,arquivo.getAbsolutePath());
+           
+            JOptionPane.showMessageDialog(this, "Relatório gerado com sucesso em:\n" + arquivo.getAbsolutePath());
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao gerar relatório: " + e.getMessage());
+            e.printStackTrace(); // útil para depuração
+        }
+    }
+}
+
+
+
 }

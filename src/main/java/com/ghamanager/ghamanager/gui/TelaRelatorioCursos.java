@@ -236,13 +236,14 @@ public class TelaRelatorioCursos extends javax.swing.JFrame {
 
             List<Curso> cursos = func.getCursos();
 
-            if (cursos.isEmpty()) {
+            if (cursos == null || cursos.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Sem cursos cadastrado para o funcionario");
             } else {
-                // Formato para as datas na tabela
+
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
                 for (Curso curso : cursos) {
+
                     // Preenche uma nova linha da tabela para cada curso
                     Object[] linha = new Object[]{
                         curso.getNomeCurso(),
@@ -252,6 +253,7 @@ public class TelaRelatorioCursos extends javax.swing.JFrame {
                     tabela.addRow(linha);
 
                 }
+
             }
 
         } else {
